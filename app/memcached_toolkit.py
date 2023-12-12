@@ -9,7 +9,7 @@ memcache_port = 11211
 
 client = base.Client((memcache_host, memcache_port))
 
-# TODO: add creation and expiration time/date
+# add creation and expiration time/date
 def generate_metadata_json_string(real_filename: str, url_uuid: str, is_note: bool):
     return json.dumps({"real_filename": real_filename, "url_uuid": url_uuid, "is_note": is_note, "creation_date": "00:00:0000"})
 
