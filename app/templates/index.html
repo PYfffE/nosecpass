@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Одноразовая загрузка</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"], textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Одноразовая загрузка</h1>
+
+        <!-- Форма для загрузки файла -->
+        <form method="POST" action="/file" enctype="multipart/form-data">
+            <label for="file">Выберите файл:</label>
+            <input type="file" name="file" id="file" accept=".txt, .pdf, .doc, .docx, .png, .jpg, .jpeg" required>
+            <button type="submit">Загрузить файл</button>
+        </form>
+
+        <!-- Форма для ввода текста -->
+        <form method="POST" action="/note">
+            <label for="text_note">Введите текст:</label>
+            <textarea name="text_note" id="text_note" rows="4" required></textarea>
+            <button type="submit">Загрузить текст</button>
+        </form>
+    </div>
+</body>
+</html>
