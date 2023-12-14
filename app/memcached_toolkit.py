@@ -18,7 +18,7 @@ def generate_uuid():
 
 def save_note(filename, note_text):
     temp_uuid = generate_uuid()
-    open(os.path.join('.\\uploads' + '\\' + filename), 'w').write(note_text)
+    open(os.path.join('.\\uploads' + '\\' + filename), 'w', encoding='utf-8').write(note_text)
     return filename
 
 def load_file(filename):
@@ -32,16 +32,13 @@ def create_note(uploaded_text):
     return temp_uuid
 
 def get_created_file(file_uuid):
-    file_meta = json.loads(client.get(file_uuid))
-
+    file_meta = client.get(file_uuid)
     if file_meta is None:
         return None
 
-    return file_meta
+    json_file_meta = json.loads(file_meta.decode())
 
+    return json_file_meta
 
-
-def memcache_test():
-    client.set("test1", "asdasd")
-    print(client.get("test1"))
-
+def remove_entry(file_uuid: str):
+    client.delete(file_uuid)

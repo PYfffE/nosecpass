@@ -28,6 +28,8 @@
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
+            overflow: auto;      /* Добавляем полосы прокрутки по мере необходимости */
+            white-space: nowrap; /* Для корректного отображения переносов строки */
         }
 
         button {
@@ -55,11 +57,12 @@
             <input type="file" name="file" id="file" accept=".txt, .pdf, .doc, .docx, .png, .jpg, .jpeg" required>
             <button type="submit">Загрузить файл</button>
         </form>
+        <br />
 
         <!-- Форма для ввода текста -->
-        <form method="POST" action="/note">
+        <form method="POST" action="/note" accept-charset="utf-8">
             <label for="text_note">Введите текст:</label>
-            <textarea name="text_note" id="text_note" rows="4" required></textarea>
+            <textarea name="text_note" id="text_note" rows="10" required></textarea>
             <button type="submit">Загрузить текст</button>
         </form>
     </div>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Одноразовая Ссылка</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #link-container {
+            margin-bottom: 20px;
+        }
+
+        #copy-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #copy-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Одноразовая Ссылка</h1>
+
+        <div id="link-container">
+            <p>Ваша одноразовая ссылка:</p>
+            <p id="oneTimeLink">{{ temp_link }}</p>
+        </div>
+
+        <button id="copy-button" onclick="copyLink()">Копировать ссылку</button>
+
+        <script>
+            function copyLink() {
+                var oneTimeLinkText = document.getElementById("oneTimeLink").innerHTML;
+
+                navigator.clipboard.writeText(oneTimeLinkText)
+
+                //document.execCommand("copy");
+
+                // Используем SweetAlert2 для уведомления
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ссылка скопирована',
+                    text: 'Одноразовая ссылка успешно скопирована в буфер обмена',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        </script>
+    </div>
+
+    <!-- Ваш скрипт SweetAlert2 (если необходим) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</body>
+</html>

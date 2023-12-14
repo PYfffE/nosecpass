@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Одноразовая Заметка</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #note-text {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: auto;   /*     Добавляем полосы прокрутки по мере необходимости */
+            /* white-space: nowrap;   Для корректного отображения переносов строки */
+            /* overflow: hidden; */
+            text-align: left;
+        }
+
+        #copy-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #copy-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Одноразовая Заметка</h1>
+
+        <pre id="note-text">{{ note_data }}</pre>
+
+        <button id="copy-button" onclick="copyToClipboard()">Копировать текст</button>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function copyToClipboard() {
+                var noteText = document.getElementById("note-text");
+                var range = document.createRange();
+                range.selectNode(noteText);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+
+                // Получаем текст из выделенного фрагмента и удаляем последний символ (символ новой строки)
+
+                var selectedText = window.getSelection().toString().replace(/[\r\n]{1,2}$/,'').replace(/^[\r\n]{1,2}/,'')
+                navigator.clipboard.writeText(selectedText)
+
+                // Используем SweetAlert2 для более красивого уведомления
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Текст скопирован',
+                    text: 'Текст успешно скопирован в буфер обмена',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        </script>
+    </div>
+</body>
+</html>
