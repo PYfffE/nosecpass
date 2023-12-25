@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение загрузки файла</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .warning {
+            color: #ff6347; /* Темно-красный цвет для предупреждения */
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Подтверждение загрузки файла</h1>
+
+        <p class="warning">Внимание! Загрузка файла будет доступна только один раз.</p>
+
+        <a href="#" onclick="downloadFile()">Скачать файл</a>
+
+        <script>
+            function downloadFile() {
+                // Получаем текущий путь в браузере
+                var currentPath = window.location.pathname;
+
+                // Формируем новую ссылку с параметром confirm
+                var downloadLink = currentPath + "?confirm";
+
+                // Переходим по ссылке
+                window.location.href = downloadLink;
+            }
+        </script>
+    </div>
+</body>
+</html>
