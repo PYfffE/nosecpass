@@ -6,7 +6,7 @@ services:
     expose:
       - "5000"
     volumes:
-      - ./app:/app
+      - ./app/uploads:/app/uploads
     depends_on:
       - memcached
 

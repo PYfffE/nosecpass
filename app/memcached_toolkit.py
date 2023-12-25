@@ -3,10 +3,11 @@ import uuid
 
 from werkzeug.datastructures.file_storage import FileStorage
 from pymemcache.client import base
+from config import server_config
 import json
 
-memcache_host = '127.0.0.1'
-memcache_port = 11211
+memcache_host = server_config['MEMCACHED_HOST']
+memcache_port = server_config['MEMCACHED_PORT']
 
 client = base.Client((memcache_host, memcache_port))
 

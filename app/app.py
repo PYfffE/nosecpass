@@ -22,9 +22,10 @@ def upload_note():
     if request.method == 'POST':
         uploaded_text = request.form['text_note'].replace('\r','')
         note_uuid = memcached_toolkit.create_note(uploaded_text)
-        temp_link = url_for('download', temp_uuid=note_uuid, _external=True)
+        host = request.headers.get('Host', '')
+        # temp_link = url_for('download', temp_uuid=note_uuid, _external=True)
+        temp_link = f'https://{host}/download/{note_uuid}'
         return render_template('show_temp_link.html', temp_link=temp_link)
-
 
 
 @app.route('/file', methods=['POST'])
