@@ -1,16 +1,10 @@
-import threading
-import urllib
-from time import sleep
-import garmage_collector
+import garbage_collector
 
-import flask
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, url_for, send_file
 import memcached_toolkit
 import os
-import uuid
-from datetime import datetime, timedelta
+from datetime import timedelta
 from config import server_config
-from flask import after_this_request
 
 
 app = Flask(__name__)
@@ -53,7 +47,7 @@ def download(temp_uuid):
         return render_template('404.html'), 404
 
     if file_meta['is_note']:
-        note_data = open(os.path.join('.\\uploads', temp_uuid), 'r', encoding='utf-8').read()
+        note_data = open(os.path.join('./uploads', temp_uuid), 'r', encoding='utf-8').read()
         memcached_toolkit.remove_entry(temp_uuid)
         return render_template('note_display.html', note_data=note_data)
 
@@ -64,9 +58,11 @@ def download(temp_uuid):
 
         print('before_response')
 
-        return send_file(os.path.join('.\\uploads', temp_uuid), download_name=file_meta['real_filename'], as_attachment=True)
+        return send_file(os.path.join('./uploads', temp_uuid), download_name=file_meta['real_filename'], as_attachment=True)
 
 
 if __name__ == '__main__':
-    threading.Thread(target=garmage_collector.cleanup_files).start()
+    garbage_collector.start_scheduler()
     app.run()
+else:
+    garbage_collector.start_scheduler()

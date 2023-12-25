@@ -19,11 +19,11 @@ def generate_uuid():
     return str(uuid.uuid4())
 
 def save_note(note_uuid, note_text):
-    open(os.path.join('.\\uploads\\' + note_uuid), 'w', encoding='utf-8').write(note_text)
+    open(os.path.join('./uploads/' + note_uuid), 'w', encoding='utf-8').write(note_text)
     return note_uuid
 
 def save_file(file: FileStorage, file_uuid: str):
-    file.save(os.path.join('.\\uploads\\', file_uuid))
+    file.save(os.path.join('./uploads/', file_uuid))
     return file_uuid
 
 def load_file(filename):
