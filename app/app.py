@@ -8,9 +8,14 @@ from config import server_config
 
 
 app = Flask(__name__)
+
 app.config['DEBUG'] = server_config['DEBUG']
 app.config['TEMP_LINK_DURATION'] = timedelta(hours=1)  # Время действия одноразовой ссылки
-app.config['UPLOAD_DIR'] = server_config['UPLOAD_DIR']
+app.config['UPLOAD_DIR'] = 'uploads'
+
+# Rewrite env from docker-compose  .env file
+app.config.from_prefixed_env()
+
 
 
 def save_file(file, filename):
@@ -22,9 +27,9 @@ def upload_note():
     if request.method == 'POST':
         uploaded_text = request.form['text_note'].replace('\r','')
         note_uuid = memcached_toolkit.create_note(uploaded_text)
-        host = request.headers.get('Host', '')
-        # temp_link = url_for('download', temp_uuid=note_uuid, _external=True)
-        temp_link = f'https://{host}/download/{note_uuid}'
+        # host = request.headers.get('Host', '')
+        temp_link = url_for('download', temp_uuid=note_uuid, _external=True, _scheme='https')
+        # temp_link = f'https://{host}/download/{note_uuid}'
         return render_template('show_temp_link.html', temp_link=temp_link)
 
 
@@ -33,7 +38,7 @@ def upload_file():
     if request.method == 'POST':
         uploaded_file = request.files['file']
         file_uuid = memcached_toolkit.create_file(uploaded_file)
-        temp_link = url_for('download', temp_uuid=file_uuid, _external=True)
+        temp_link = url_for('download', temp_uuid=file_uuid, _external=True, _scheme='https')
         return render_template('show_temp_link.html', temp_link=temp_link)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -63,7 +68,8 @@ def download(temp_uuid):
 
 
 if __name__ == '__main__':
-    garbage_collector.start_scheduler()
+    garbage_collector.init_scheduler()
     app.run()
+
 else:
-    garbage_collector.start_scheduler()
+    garbage_collector.init_scheduler()

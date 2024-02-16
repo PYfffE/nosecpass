@@ -47,6 +47,12 @@
         #copy-button:hover {
             background-color: #45a049;
         }
+
+        .warning {
+            color: #ff6347; /* Темно-красный цвет для предупреждения */
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +62,8 @@
         <pre id="note-text">{{ note_data }}</pre>
 
         <button id="copy-button" onclick="copyToClipboard()">Копировать текст</button>
+
+        <p class="warning">Внимание! После обовления сраницы текст будет удалён.</p>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script>

@@ -9,6 +9,9 @@ services:
       - ./app/uploads:/app/uploads
     depends_on:
       - memcached
+    environment:
+      - FLASK_DEBUG=${FLASK_DEBUG}
+      - FLASK_UPLOAD_DIR=${FLASK_UPLOAD_DIR}
 
   memcached:
     image: memcached

@@ -4,4 +4,4 @@
 ## Добавить срок хранения одноразовых ссылок
 
 # Обернуть в контейнеры
-## Добавить в docker-compose вместе с nginx https proxy
+## (done) Добавить в docker-compose вместе с nginx https proxy
