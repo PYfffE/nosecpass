@@ -1,6 +1,8 @@
-# Startup
+## Intro
+Some temp centralized file storage. Just if you need transfer file to a few people and auto delete it
 
-### ATTENTION! DO NOT USE APP DIRECTLY WITHOUT NGINX HTTPS PROXY
+## Startup
+### DO NOT USE APP DIRECTLY WITHOUT NGINX HTTPS PROXY
 
 1. Create ssl certificates in nginx/certs
 
